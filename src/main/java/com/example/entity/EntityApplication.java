@@ -5,6 +5,8 @@ import com.example.entity.repository.ProductRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -50,6 +52,17 @@ public class EntityApplication implements CommandLineRunner {
 
 		productRepository.save(product2);
 
+		Product product3=new Product();
+		product3.setName("Tester Product");
+		product3.setCategory("TEST");
+		product3.setType("SPECIFIC");
+		product3.setDescription("description");
+		product3.setPrice(19.0);
+		product3.setSector("MATHS");
+
+		productRepository.save(product3);
+
+
 //		List<Product> products =productRepository.findAll();
 //		for(Product product:products){
 //			LOG.info("Products found :"+product.toString());
@@ -58,10 +71,20 @@ public class EntityApplication implements CommandLineRunner {
 //		Product resultProduct= productRepository.findByType("GENERAL");
 //		LOG.info("GENERAL type of products found: "+ resultProduct.toString());
 
-		List<Product> results= productRepository.findByDescriptionAndCategory("This is a tester product","TEST");
+//		List<Product> results= productRepository.findByDescriptionAndCategory("This is a tester product","TEST");
+//
+//		for(Product product:results){
+//			LOG.info("Matching results are:"+ product.toString());
+//		}
 
-		for(Product product:results){
-			LOG.info("Matching results are:"+ product.toString());
+		List <String> names=new ArrayList<>();
+		names.add("Tester Product");
+		//names.add("Another Tester Product");
+
+		List<Product> resultProducts=productRepository.findByCategoryAndNameIn("TEST",names);
+
+		for(Product product: resultProducts){
+			LOG.info("Matching results for findByCategoryAndNameIn:"+ product.toString());
 		}
 
 	}
