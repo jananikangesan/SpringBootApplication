@@ -62,6 +62,17 @@ public class EntityApplication implements CommandLineRunner {
 
 		productRepository.save(product3);
 
+		//productRepository.delete(product3);
+
+		Product foundProduct =productRepository.findByType("GENERAL");
+
+		if(foundProduct != null){
+			LOG.info("Product count in database : " + productRepository.count());
+			productRepository.delete(foundProduct);
+			LOG.info("Product is deleted");
+			LOG.info("Product count in database : " + productRepository.count());
+		}
+
 
 //		List<Product> products =productRepository.findAll();
 //		for(Product product:products){
@@ -77,15 +88,15 @@ public class EntityApplication implements CommandLineRunner {
 //			LOG.info("Matching results are:"+ product.toString());
 //		}
 
-		List <String> names=new ArrayList<>();
-		names.add("Tester Product");
+		//List <String> names=new ArrayList<>();
+		//names.add("Tester Product");
 		//names.add("Another Tester Product");
 
-		List<Product> resultProducts=productRepository.findByCategoryAndNameIn("TEST",names);
+		//List<Product> resultProducts=productRepository.findByCategoryAndNameIn("TEST",names);
 
-		for(Product product: resultProducts){
-			LOG.info("Matching results for findByCategoryAndNameIn:"+ product.toString());
-		}
+		//for(Product product: resultProducts){
+		//	LOG.info("Matching results for findByCategoryAndNameIn:"+ product.toString());
+		//}
 
 	}
 
