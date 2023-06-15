@@ -62,17 +62,34 @@ public class EntityApplication implements CommandLineRunner {
 
 		productRepository.save(product3);
 
+		/******Deleting with JPA ******/
 		//productRepository.delete(product3);
 
-		Product foundProduct =productRepository.findByType("GENERAL");
+//		Product foundProduct =productRepository.findByType("GENERAL");
+//
+//		if(foundProduct != null){
+//			LOG.info("Product count in database : " + productRepository.count());
+//			productRepository.delete(foundProduct);
+//			LOG.info("Product is deleted");
+//			LOG.info("Product count in database : " + productRepository.count());
+//		}
 
-		if(foundProduct != null){
-			LOG.info("Product count in database : " + productRepository.count());
-			productRepository.delete(foundProduct);
-			LOG.info("Product is deleted");
-			LOG.info("Product count in database : " + productRepository.count());
+		/********** Updating with JPA ***********/
+
+		Product productToUpdate = productRepository.findByType("SPECIFIC");
+
+		if(productToUpdate != null){
+			LOG.info("Before update product details: "+ productToUpdate);
+			productToUpdate.setName("Updated Product");
+			productToUpdate.setDescription("Updated description");
+
+			Product updated = productRepository.save(productToUpdate);
+			LOG.info("Updated product details: "+updated.toString());
 		}
 
+
+
+		/******** Querying Data with JPA *********/
 
 //		List<Product> products =productRepository.findAll();
 //		for(Product product:products){
