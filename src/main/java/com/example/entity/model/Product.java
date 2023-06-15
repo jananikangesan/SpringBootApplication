@@ -1,13 +1,15 @@
 package com.example.entity.model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table
 public class Product {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.AUTO,generator ="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy="uuid2")
+    private String id;
     private String name;
     private  String category;
     private String type;
@@ -15,11 +17,11 @@ public class Product {
     private Double price;
     private String description;
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
