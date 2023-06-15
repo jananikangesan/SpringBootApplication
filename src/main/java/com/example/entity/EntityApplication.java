@@ -44,17 +44,25 @@ public class EntityApplication implements CommandLineRunner {
 		product2.setName("Another Tester Product");
 		product2.setCategory("TEST");
 		product2.setType("CUSTOM");
-		product2.setDescription("Product2");
+		product2.setDescription("This is a tester product");
 		product2.setPrice(15.0);
 		product2.setSector("IT");
 
 		productRepository.save(product2);
 
-		List<Product> products =productRepository.findAll();
-		for(Product product:products){
-			LOG.info("Products found :"+product.toString());
-		}
+//		List<Product> products =productRepository.findAll();
+//		for(Product product:products){
+//			LOG.info("Products found :"+product.toString());
+//		}
 
+//		Product resultProduct= productRepository.findByType("GENERAL");
+//		LOG.info("GENERAL type of products found: "+ resultProduct.toString());
+
+		List<Product> results= productRepository.findByDescriptionAndCategory("This is a tester product","TEST");
+
+		for(Product product:results){
+			LOG.info("Matching results are:"+ product.toString());
+		}
 
 	}
 
